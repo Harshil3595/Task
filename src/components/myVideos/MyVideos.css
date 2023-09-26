@@ -1,0 +1,67 @@
+/* MyVideos.css */
+
+.my-favorite-videos {
+    padding: 20px;
+  }
+  
+  .my-favorite-videos h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .my-favorite-videos .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .my-favorite-videos .video-thumbnail {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .my-favorite-videos .video-thumbnail img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .my-favorite-videos .video-thumbnail h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .my-favorite-videos .video-thumbnail p {
+    font-size: 0.9rem;
+  }
+  
+  .my-favorite-videos .tags {
+    margin-top: 10px;
+  }
+  
+  .my-favorite-videos .tags span {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    font-size: 0.8rem;
+  }
+  
+  .my-favorite-videos .tags span:last-child {
+    margin-right: 0;
+  }
+  
+  .my-favorite-videos button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+  
