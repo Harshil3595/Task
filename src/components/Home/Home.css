@@ -12,6 +12,10 @@
   flex-direction: column;
 }
 
+.main{
+  border: 2px solid black;
+}
+
 .custom-carousel {
   position: relative;
   height: 400px;
@@ -91,11 +95,29 @@ button {
   flex-direction: row;
 }
 
+.favourite-videos{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.favourite-videos h5{
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
 .all-tags span{
-  border: 1px solid black;
-  padding: 10px 10px;
-  border-radius: 10px;
-  margin: 10px;
+    background-color: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    font-size: 0.8rem;
+}
+
+.all-videos h5{
+  margin-left: 20px;
 }
 
 .all-btn{
@@ -109,4 +131,9 @@ button {
 
 .video-player button:focus {
   outline: none;
+}
+
+.radio-group label{
+  margin: 10px;
+  font-size: 15px;
 }

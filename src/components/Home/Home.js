@@ -10,12 +10,15 @@ function Home() {
 
   const { info } = useSelector((state) => state.info);
 
+  const favorites_videos = JSON.parse(localStorage.getItem("favorites")) || [];
+
   useEffect(() => {
     dispatch(getAllInfo());
   }, [dispatch]);
 
   const [currentVideo, setCurrentVideo] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("All Videos");
 
   const addToFavorites = (video) => {
     if (!favorites.find((fav) => fav.videolink === video.videolink)) {
@@ -88,13 +91,26 @@ function Home() {
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              {favorites.length > 0 && (
-                <div className="favorites">
-                  <button onClick={() => navigate("/favourites")}>
-                    View My Favorites
-                  </button>
-                </div>
-              )}{" "}
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    value="All Videos"
+                    checked={selectedOption === "All Videos"}
+                    onChange={() => setSelectedOption("All Videos")}
+                  />
+                  All Videos
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="Favorites"
+                    checked={selectedOption === "Favorites"}
+                    onChange={() => setSelectedOption("Favorites")}
+                  />
+                  Favorites
+                </label>
+              </div>
             </div>
           </div>
           <div class="carousel-item">
@@ -104,13 +120,26 @@ function Home() {
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              {favorites.length > 0 && (
-                <div className="favorites">
-                  <button onClick={() => navigate("/favourites")}>
-                    View My Favorites
-                  </button>
-                </div>
-              )}{" "}
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    value="All Videos"
+                    checked={selectedOption === "All Videos"}
+                    onChange={() => setSelectedOption("All Videos")}
+                  />
+                  All Videos
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="Favorites"
+                    checked={selectedOption === "Favorites"}
+                    onChange={() => setSelectedOption("Favorites")}
+                  />
+                  Favorites
+                </label>
+              </div>
             </div>
           </div>
           <div class="carousel-item">
@@ -120,13 +149,26 @@ function Home() {
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              {favorites.length > 0 && (
-                <div className="favorites">
-                  <button onClick={() => navigate("/favourites")}>
-                    View My Favorites
-                  </button>
-                </div>
-              )}
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    value="All Videos"
+                    checked={selectedOption === "All Videos"}
+                    onChange={() => setSelectedOption("All Videos")}
+                  />
+                  All Videos
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="Favorites"
+                    checked={selectedOption === "Favorites"}
+                    onChange={() => setSelectedOption("Favorites")}
+                  />
+                  Favorites
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -149,7 +191,23 @@ function Home() {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <div className="video-grid">
+      {selectedOption === "Favorites" && (<div className="favourite-videos">
+        <h5>My Favorite Videos</h5>
+        <div className="video-grid">
+          {favorites_videos.map((video) => (
+            <div key={video.videolink} className="video-thumbnail">
+              <img
+                src={video.thumbnailUrl}
+                alt={video.title}
+                onClick={() => playVideo(video)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>)}
+      <div className="all-videos">
+        <h5>All videos</h5>
+        <div className="video-grid">
         {info &&
           info.map((video) => (
             <div key={video.videolink} className="video-thumbnail">
@@ -161,33 +219,39 @@ function Home() {
             </div>
           ))}
       </div>
+      </div>
 
-      {currentVideo && (
-        <>
-          <div className="video-player">
-            <iframe
-              title={currentVideo.title}
-              width="560"
-              height="315"
-              src={currentVideo.videolink}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-            <h4>{currentVideo.title}</h4>
-            <div className="all-tags">
-              {currentVideo.tags.map((tag) => (
-                <span className="tags" key={tag}>
-                  {tag}
-                </span>
-              ))}
+      <div className="main">
+        {currentVideo && (
+          <>
+            <div className="video-player">
+              <iframe
+                title={currentVideo.title}
+                width="560"
+                height="315"
+                src={currentVideo.videolink}
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+              <h4>{currentVideo.title}</h4>
+              <div className="all-tags">
+                {currentVideo.tags.map((tag) => (
+                  <span className="tags" key={tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="all-btn">
+                <button onClick={() => setCurrentVideo(null)}>
+                  Close Video
+                </button>
+                <button onClick={addToFavoritesButton}>Add to Favorites</button>
+                {/* <button onClick={removeFromFavorites()}>Remove from Favorites </button> */}
+              </div>
             </div>
-            <div className="all-btn">
-              <button onClick={() => setCurrentVideo(null)}>Close Video</button>
-              <button onClick={addToFavoritesButton}>Add to Favorites</button>
-            </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </>
   );
 }
