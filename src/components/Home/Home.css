@@ -25,6 +25,7 @@
 }
 
 .video-thumbnail {
+  position: relative;
   cursor: pointer;
 }
 
@@ -79,6 +80,10 @@ button {
   color: black;
 }
 
+img{
+  border-radius: 5px;
+}
+
 .video-player button {
   background-color: #007bff;
   color: #fff;
@@ -118,6 +123,8 @@ button {
 
 .all-videos h5{
   margin-left: 20px;
+  margin-top: 30px;
+  
 }
 
 .all-btn{
@@ -133,7 +140,31 @@ button {
   outline: none;
 }
 
+
+
 .radio-group label{
   margin: 10px;
-  font-size: 15px;
+  font-size: 25px;
 }
+
+.radio-group label input{
+  font-size: 40px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+  z-index: 1; 
+}
+
+.favorite-button .fa-heart {
+  font-size: 18px; 
+  color: white; 
+  cursor: pointer;
+}
+
+.favorite-button.active .fa-heart {
+  color: red; 
+}
+

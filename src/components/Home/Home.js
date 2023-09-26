@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllInfo } from "../../actions/infoactions";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {
   const dispatch = useDispatch();
@@ -27,6 +29,8 @@ function Home() {
 
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       setCurrentVideo(null);
+    } else {
+      removeFromFavorites(video);
     }
   };
 
@@ -46,12 +50,6 @@ function Home() {
 
   const playVideo = (video) => {
     setCurrentVideo(video);
-  };
-
-  const addToFavoritesButton = () => {
-    if (currentVideo) {
-      addToFavorites(currentVideo);
-    }
   };
 
   return (
@@ -191,23 +189,33 @@ function Home() {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      {selectedOption === "Favorites" && (<div className="favourite-videos">
-        <h5>My Favorite Videos</h5>
-        <div className="video-grid">
-          {favorites_videos.map((video) => (
+     
+      {selectedOption === "Favorites" && (
+        <div className="favourite-videos">
+          <h5>My Favorite Videos</h5>
+          <div className="video-grid">
+          {favorites_videos &&
+            favorites_videos.map((video) => (
             <div key={video.videolink} className="video-thumbnail">
               <img
                 src={video.thumbnailUrl}
                 alt={video.title}
                 onClick={() => playVideo(video)}
               />
+              <div className="favorite-button" onClick={() => addToFavorites(video)}>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className={favorites.some((fav) => fav.videolink === video.videolink) ? "active" : ""}
+                />
+              </div>
             </div>
           ))}
+          </div>
         </div>
-      </div>)}
+      )}
       <div className="all-videos">
-        <h5>All videos</h5>
-        <div className="video-grid">
+      <h5>All videos</h5>
+      <div className="video-grid">
         {info &&
           info.map((video) => (
             <div key={video.videolink} className="video-thumbnail">
@@ -216,10 +224,16 @@ function Home() {
                 alt={video.title}
                 onClick={() => playVideo(video)}
               />
+              <div className="favorite-button" onClick={() => addToFavorites(video)}>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className={favorites.some((fav) => fav.videolink === video.videolink) ? "active" : ""}
+                />
+              </div>
             </div>
           ))}
       </div>
-      </div>
+    </div>
 
       <div className="main">
         {currentVideo && (
@@ -245,8 +259,6 @@ function Home() {
                 <button onClick={() => setCurrentVideo(null)}>
                   Close Video
                 </button>
-                <button onClick={addToFavoritesButton}>Add to Favorites</button>
-                {/* <button onClick={removeFromFavorites()}>Remove from Favorites </button> */}
               </div>
             </div>
           </>
