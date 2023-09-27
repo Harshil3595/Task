@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllInfo } from "../../actions/infoactions";
 import "./Home.css";
-import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { info } = useSelector((state) => state.info);
 
@@ -205,7 +203,6 @@ function Home() {
               <div className="favorite-button" onClick={() => addToFavorites(video)}>
                 <FontAwesomeIcon
                   icon={faHeart}
-                  className={favorites.some((fav) => fav.videolink === video.videolink) ? "active" : ""}
                 />
               </div>
             </div>
@@ -227,7 +224,6 @@ function Home() {
               <div className="favorite-button" onClick={() => addToFavorites(video)}>
                 <FontAwesomeIcon
                   icon={faHeart}
-                  className={favorites.some((fav) => fav.videolink === video.videolink) ? "active" : ""}
                 />
               </div>
             </div>

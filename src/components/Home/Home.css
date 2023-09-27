@@ -12,9 +12,6 @@
   flex-direction: column;
 }
 
-.main{
-  border: 2px solid black;
-}
 
 .custom-carousel {
   position: relative;
@@ -164,7 +161,8 @@ img{
   cursor: pointer;
 }
 
-.favorite-button.active .fa-heart {
-  color: red; 
+.radio-group label input[type="radio"] {
+  transform: scale(1.5); 
+  margin-right: 15px; 
 }
 
